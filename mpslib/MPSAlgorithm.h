@@ -112,6 +112,14 @@ protected:
 	*/
 	std::vector<std::vector<std::vector<float>>> _hdg;
 	/**
+	* @brief The grid with conditional entropy (same size as simulation grid)
+	*/
+	std::vector<std::vector<std::vector<float>>> _ceg;
+	/**
+	* @brief Compute conditional entropy
+	*/
+	bool _computeConditionalEntropy = 1;
+	/**
 	* @brief Temporary grid 1 - meaning define by type of sim-algorithm (same size as simulation grid)
 	*/
 	std::vector<std::vector<std::vector<float>>> _tg1;

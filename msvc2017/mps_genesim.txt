@@ -1,10 +1,10 @@
 Number of realizations # 1
 Random Seed (0 `random` seed) # 1
-Maximum number of counts for conditional pdf # 1
+Maximum number of counts for conditional pdf # 100
 Max number of conditional point # 4
 Max number of iterations # 10000
 Distance measure [1:disc, 2:cont], minimum distance, distance power # 1 0.000000 0.000000
-Colocated Dimension [0: no colocattion; >0: Colocated] # 1 
+Colocated Dimension [0: no colocattion; >1: Colocated] # 0 
 Maximum search radius # 1000000.000000
 Simulation grid size X # 60
 Simulation grid size Y # 60

@@ -718,13 +718,18 @@ void MPS::MPSAlgorithm::startSimulation(void) {
 		//Initialize Simulation Grid from hard data or with NaN value
 		_initializeSG(_sg, _sgDimX, _sgDimY, _sgDimZ);
 		//Initialize temporary grids if debugMode is high
-		if (_debugMode>1) {
+		if (_debugMode > 1) {
 			// Initialize some extra grids for extra information
 			_initializeSG(_tg1, _sgDimX, _sgDimY, _sgDimZ);
 			_initializeSG(_tg2, _sgDimX, _sgDimY, _sgDimZ);
 			_initializeSG(_tg3, _sgDimX, _sgDimY, _sgDimZ);
 			_initializeSG(_tg4, _sgDimX, _sgDimY, _sgDimZ);
 			_initializeSG(_tg5, _sgDimX, _sgDimY, _sgDimZ);
+		}
+
+		// Initialize a grid to hold conditional entropy, if requested
+		if (_computeConditionalEntropy) {
+			_initializeSG(_ceg, _sgDimX, _sgDimY, _sgDimZ);
 		}
 
 		/*if(!_hdg.empty()) {
@@ -939,6 +944,10 @@ void MPS::MPSAlgorithm::startSimulation(void) {
 			MPS::io::writeToGSLIBFile(outputFilename + "_tg5_" + std::to_string(n) + ".gslib", _tg5, _sgDimX, _sgDimY, _sgDimZ);
 		}
 
+		if (_computeConditionalEntropy) {
+			//Write conditional entropy grid til file
+			MPS::io::writeToGSLIBFile(outputFilename + "_cde_" + std::to_string(n) + ".gslib", _ceg, _sgDimX, _sgDimY, _sgDimZ);
+		}
 
 		if (_debugMode > 1) {
 			//Write random path to file

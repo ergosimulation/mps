@@ -526,18 +526,17 @@ bool MPS::ENESIM::_getCpdfTiEnesimNew(const int& sgIdxX, const int& sgIdxY, cons
 		// Check if the current _tiPath is set of for full size, and if so, reduce the size
 		int smallTiSize = _tiDimX * _tiDimY; // size of the TI-grid to scan through
 		if (_tiPath.size() != smallTiSize) {
-			std::cout << "Using Co-located dimension = " << _ColocatedDimension << std::endl;
-			std::cout << _tiPath.size() << "<" << smallTiSize << std::endl;
+			if (_debugMode > 2) {
+				std::cout << "Using Co-located dimension = " << _ColocatedDimension << std::endl;
+				std::cout << _tiPath.size() << "<" << smallTiSize << std::endl;
+			}
 			_tiPath.resize(smallTiSize);
-			std::cout << "New reduced Ti path size = " << _tiPath.size() << std::endl;
+			if (_debugMode > 2) {
+				std::cout << "New reduced Ti path size = " << _tiPath.size() << std::endl;
+			}
 		}
 	
-		/*
-		std::cout << "START:" << std::endl;
-		std::cout << "  _tiPath[0]=" << _tiPath[0] << ", _tiPath[end]=" << _tiPath.back() << ", N=" << _tiPath.size() << std::endl;
-		*/
-
-		int node1DIdx;
+				int node1DIdx;
 		int cnt = 0;
 		int z = sgIdxZ; // The current position in the simulation grid
 		for (int y = 0; y<_tiDimY; y++) {
@@ -845,18 +844,33 @@ bool MPS::ENESIM::_getCpdfTiEnesimNew(const int& sgIdxX, const int& sgIdxY, cons
 	}
 	
 	
-	if (_debugMode > 2) {
+	// Compute the Conditional Entropy 
+	if (_computeConditionalEntropy) {
+		float H = 0;
+		float P = 0;
+		float I = 0;
+		int N = 2; // number of outcomes.. global parameter?
 		for (std::map<float, float>::iterator iter = cPdf.begin(); iter != cPdf.end(); ++iter) {
-			std::cout << " P(" << iter->first << ")=" << iter->second; 
+			if (_debugMode > 2) {
+				std::cout << " P(" << iter->first << ")=" << iter->second;
+			}
 			cPdf.insert(std::pair<float, float>(iter->first, (float)(iter->second) / (float)totalCounter_conditionalSoftProb));
+			P = iter->second;
+			if (P > 0) {
+				I = -P * log(P) / log(N);
+				H = H + I;
+			}
 		}
-		std::cout << std::endl;
+		if (_debugMode > 2) {
+			std::cout << " H= " << H << ".";
+			std::cout << std::endl;
+		}
+		_ceg[sgIdxZ][sgIdxY][sgIdxX] = H;
+		
 	}
 
-	
 
-
-	if (_debugMode>2) {
+	if (_debugMode > 2) {
 		std::cout << "NsimInTI=" << i_ti_path;
 		std::cout << " --CpdfCount = " << CpdfCount;
 		std::cout << " valueFromTI = " << valueFromTI;
@@ -864,9 +878,7 @@ bool MPS::ENESIM::_getCpdfTiEnesimNew(const int& sgIdxX, const int& sgIdxY, cons
 
 		std::cout << "SGxyx=(" << sgIdxX << "," << sgIdxY << "," << sgIdxZ << ")" << std::endl;
 		std::cout << "_getCpdfTiEnesim: -- ENESIM END --" << std::endl;
-
 	}
-
 
 
 	return true;
