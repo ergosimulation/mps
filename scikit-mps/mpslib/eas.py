@@ -80,14 +80,16 @@ def read(filename='eas.dat'):
         print("eas: COULD NOT READ DATA FROM %s" % filename)
         
     
+    try:
+        # If dimensions are given in title, then convert to 2D/3D array
+        if "dim" in eas:
+            eas['Dmat']=eas['D'].reshape((eas['dim']['ny'],eas['dim']['nx']))
+            if (debug_level>0):
+                print("eas: converted data in matrixes (Dmat)")
     
-    # If dimensions are given in title, then convert to 2D/3D array
-    if "dim" in eas:
-        eas['Dmat']=eas['D'].reshape((eas['dim']['ny'],eas['dim']['nx']))
-        if (debug_level>0):
-            print("eas: converted data in matrixes (Dmat)")
-
-    eas['filename']=filename
+        eas['filename']=filename
+    except:
+        print("eas: COULD NOT CONVERT %s TO MATRIX" % filename)
 
     return eas
 

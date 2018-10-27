@@ -43,6 +43,7 @@ class mpslib:
         self.gslib_combine = gslib_combine  # combine realzations into one gslib file
 
         self.sim = None
+        self.cde = None
 
         self.par = {}
 
@@ -358,6 +359,19 @@ class mpslib:
                 print('mpslib: Reading: %s' % (filename))
             self.sim.append(OUT['Dmat'])
             success = True
+        
+        # read conditional entropt simulated data
+        self.cde = []
+        for i in range(0, self.par['n_real']):
+            filename = '%s_cde_%d.gslib' % (self.par['ti_fnam'], i)
+            OUT = eas.read(filename)
+            if (self.verbose_level > 0):
+                print('mpslib: Reading: %s' % (filename))
+            self.cde.append(OUT['Dmat'])
+            success = True
+            
+            
+            
 
         # combine gslib output files
         if (self.gslib_combine):
@@ -430,6 +444,27 @@ class mpslib:
             if (self.verbose_level > 0):
                 print('mpslib: Reading: %s' % (filename))
             self.sim.append(OUT['Dmat'])
+    
+    # Loads existing conditional entropy
+    def load_cde(self):
+        # Check if simulation results are already imported
+        if self.cde is not None:
+            s = 'Conditional Entropy already imported'
+            raise Exception(s)
+
+        self.cde = []
+        for i in range(0, self.par['n_real']):
+            filename = '%s_cde_%d.gslib' % (self.par['ti_fnam'], i)
+
+            if os.path.isfile(filename) is False:
+                s = '{} file not found'.format(filename)
+
+            OUT = eas.read(filename)
+
+            if (self.verbose_level > 0):
+                print('mpslib: Reading: %s' % (filename))
+            self.cest.append(OUT['Dmat'])
+            
 
     # delete gslib files
     def delete_gslib(self, remove_all_gslib=0):
