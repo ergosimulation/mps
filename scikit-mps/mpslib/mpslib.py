@@ -17,12 +17,12 @@ def is_exe(filename):
 # %% THE CLASS
 class mpslib:
 
-    def __init__(self, parameter_filename='mps.txt', method='mps_genesim', debug_level=-1, n_real=1, rseed=1,
+    def __init__(self, parameter_filename='mps.txt', method='mps_genesim', debug_level=1, n_real=1, rseed=1,
                  out_folder='.', ti_fnam='ti.dat', simulation_grid_size=np.array([80, 40, 1]),
                  origin=np.zeros(3), grid_cell_size=np.array([1, 1, 1]), hard_data_fnam='hard.dat',
                  shuffle_simulation_grid=2, entropyfactor_simulation_grid=4, shuffle_ti_grid=1,
                  hard_data_search_radius=1,
-                 soft_data_categories=np.arange(2), soft_data_fnam='soft.dat', n_threads=1, verbose_level=0,
+                 soft_data_categories=np.arange(2), soft_data_fnam='soft.dat', n_threads=1, verbose_level=1,
                  template_size=np.array([8, 7, 1]), n_multiple_grids=3, n_cond=36, n_min_node_count=0,
                  n_max_ite=1000000, n_max_cpdf_count=1, distance_measure=1, distance_min=0, distance_pow=1,
                  max_search_radius=10000000, remove_gslib_after_simulation=1, gslib_combine=1, ti=np.empty(0), 
@@ -38,7 +38,7 @@ class mpslib:
         self.method = method.lower()  # change string to lower case
         self.verbose_level = verbose_level
         self.verbose_level = debug_level
-
+        
         self.remove_gslib_after_simulation = remove_gslib_after_simulation  # remove individual gslib fiels after simulation
         self.gslib_combine = gslib_combine  # combine realzations into one gslib file
 

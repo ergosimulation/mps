@@ -15,8 +15,10 @@ O1 = mps.mpslib(method='mps_genesim', n_real = 1)
 O1.par['n_max_cpdf_count']=1e+9 # ENESIM
 #O1.par['n_max_cpdf_count']=30 # ENESIM
 O1.par['simulation_grid_size']=[100,80,1]
+O1.par['simulation_grid_size']=[10,80,1]
 O1.par['ti_fnam']='ti.dat'
 O1.par['rseed']=0
+mps_dir = os.path.dirname(mps.__file__)
 #O1.mpslib_exe_folder=os.path.join(os.getcwd(),'x64','Release')
 O1.mpslib_exe_folder=os.path.join(os.getcwd(),'..')
 O1.parameter_filename = 'mps_genesim2.txt'
