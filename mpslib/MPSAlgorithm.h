@@ -280,7 +280,7 @@ protected:
 	* @brief Soft data categories
 	*/
 	std::vector<float> _softDataCategories;
-	std::vector<float> _DataCategories;
+	std::vector<float> _dataCategories;
 	/**
 	* @brief Softdata grid
 	*/

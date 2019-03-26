@@ -466,7 +466,7 @@ void MPS::MPSAlgorithm::_readMaskDataFromFile(void) {
 
 void MPS::MPSAlgorithm::_getCategories(void) {
 
-	_DataCategories.clear();
+	_dataCategories.clear();
 	
 	// Loop through TI to find unique categories _Categegories
 	for (int z=0; z<_tiDimZ; z+=1) {
@@ -474,35 +474,35 @@ void MPS::MPSAlgorithm::_getCategories(void) {
 			for (int x=0; x<_tiDimX; x+=1) {
 				//For each pixel
 				float val = _TI[z][y][z];
-				if (std::find(_DataCategories.begin(), _DataCategories.end(), val) != _DataCategories.end()) {
+				if (std::find(_dataCategories.begin(), _dataCategories.end(), val) != _dataCategories.end()) {
 					//
 				} else {
 					std::cout << val << "  ";
-					_DataCategories.push_back(val);
+					_dataCategories.push_back(val);
 				}
 			}
 		}
 	}
 	
 	// sort Data Categories	
-	std::sort (_DataCategories.begin(), _DataCategories.end() );
+	std::sort (_dataCategories.begin(), _dataCategories.end() );
 	// 
 
 	if (_debugMode>-1) {
-		std::cout << "Found " << _DataCategories.size() << " unique categories" << std::endl;
+		std::cout << "Found " << _dataCategories.size() << " unique categories" << std::endl;
 	}
 	
 	// Update the soft data categories read in par file
-	_softDataCategories = _DataCategories;
+	_softDataCategories = _dataCategories;
 
 
   
-  if (_DataCategories.size() < 20 ) {
+  if (_dataCategories.size() < 20 ) {
 
 		if (_debugMode>-1) {
-			std::cout << "_DataCategories are: ";
-			for (unsigned int i = 0; i < _DataCategories.size(); i++) {
-				std::cout << _DataCategories[i] << " ";
+			std::cout << "_dataCategories are: ";
+			for (unsigned int i = 0; i < _dataCategories.size(); i++) {
+				std::cout << _dataCategories[i] << " ";
 			}
 			std::cout << std::endl;
 		
