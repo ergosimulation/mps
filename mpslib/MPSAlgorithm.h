@@ -280,7 +280,7 @@ protected:
 	* @brief Soft data categories
 	*/
 	std::vector<float> _softDataCategories;
-	//std::vector<float> _DataCategories;
+	std::vector<float> _DataCategories;
 	/**
 	* @brief Softdata grid
 	*/
@@ -353,7 +353,7 @@ protected:
 	/**
 	* @brief Get unique set of categories from TI
 	*/
-	//void _getCategories(void);
+	void _getCategories(void);
 
 	/**
 	* @brief Initialize a sequential simulation path

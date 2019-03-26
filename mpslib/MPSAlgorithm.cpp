@@ -463,7 +463,7 @@ void MPS::MPSAlgorithm::_readMaskDataFromFile(void) {
 * @brief Mask data
 */
 
-/*
+
 void MPS::MPSAlgorithm::_getCategories(void) {
 
 	_DataCategories.clear();
@@ -493,7 +493,7 @@ void MPS::MPSAlgorithm::_getCategories(void) {
 	}
 	
 	// Update the soft data categories read in par file
-	// _softDataCategories = _DataCategories;
+	_softDataCategories = _DataCategories;
 
 
   
@@ -519,7 +519,6 @@ void MPS::MPSAlgorithm::_getCategories(void) {
 		}
 	}
 }
-*/
 
 /**
 * @brief Fill a simulation grid node from hard data and a search radius
