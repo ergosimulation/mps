@@ -24,5 +24,5 @@ HardData seach radius (world units) # 1
 Softdata categories (separated by ;) # 0;1
 Soft datafilenames (separated by ; only need (number_categories - 1) grids) # soft_dummy.dat
 Number of threads (minimum 1, maximum 8 - depend on your CPU) # 1
-Debug mode(2: write to file, 1: show preview, 0: show counters, -1: no ) # 1
+Debug mode(2: write to file, 1: show preview, 0: show counters, -1: no ) # 0
 Mask grid # dummyMaskGrid.dat

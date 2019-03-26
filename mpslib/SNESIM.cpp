@@ -168,6 +168,7 @@ void MPS::SNESIM::_readConfigurations(const std::string& fileName) {
 			}
 		}
 	}
+
 	// Softdata filenames
 	if(_readLineConfiguration(file, ss, data, s, str)) {
 		ss.clear();
@@ -193,6 +194,8 @@ void MPS::SNESIM::_readConfigurations(const std::string& fileName) {
 		data[1].erase(std::remove_if(data[1].begin(), data[1].end(), [](char x) {return std::isspace(x); }), data[1].end()); //Removing spaces
 		_maskDataFileName = data[1];
 	}
+
+
 }
 
 /**

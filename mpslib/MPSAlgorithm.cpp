@@ -417,6 +417,13 @@ void MPS::MPSAlgorithm::_readTIFromFiles(void) {
 		exit(-1);
 	}
 
+	//Checking the TI array dimensions
+	_tiDimX = (int)_TI[0][0].size();
+	_tiDimY = (int)_TI[0].size();
+	_tiDimZ = (int)_TI.size();
+
+	// _getCategories();
+
 }
 
 
@@ -452,6 +459,67 @@ void MPS::MPSAlgorithm::_readMaskDataFromFile(void) {
 	}
 }
 
+/**
+* @brief Mask data
+*/
+
+/*
+void MPS::MPSAlgorithm::_getCategories(void) {
+
+	_DataCategories.clear();
+	
+	// Loop through TI to find unique categories _Categegories
+	for (int z=0; z<_tiDimZ; z+=1) {
+		for (int y=0; y<_tiDimY; y+=1) {
+			for (int x=0; x<_tiDimX; x+=1) {
+				//For each pixel
+				float val = _TI[z][y][z];
+				if (std::find(_DataCategories.begin(), _DataCategories.end(), val) != _DataCategories.end()) {
+					//
+				} else {
+					std::cout << val << "  ";
+					_DataCategories.push_back(val);
+				}
+			}
+		}
+	}
+	
+	// sort Data Categories	
+	std::sort (_DataCategories.begin(), _DataCategories.end() );
+	// 
+
+	if (_debugMode>-1) {
+		std::cout << "Found " << _DataCategories.size() << " unique categories" << std::endl;
+	}
+	
+	// Update the soft data categories read in par file
+	// _softDataCategories = _DataCategories;
+
+
+  
+  if (_DataCategories.size() < 20 ) {
+
+		if (_debugMode>-1) {
+			std::cout << "_DataCategories are: ";
+			for (unsigned int i = 0; i < _DataCategories.size(); i++) {
+				std::cout << _DataCategories[i] << " ";
+			}
+			std::cout << std::endl;
+		
+
+			std::cout << "_softDataCategories are: ";
+			for (unsigned int i = 0; i < _softDataCategories.size(); i++) {
+				std::cout << _softDataCategories[i] << " ";
+			}
+			std::cout << std::endl;
+		}
+	} else {
+		if (_debugMode>-1) {
+			std::cout << "-- probably a continious training image!";		
+		}
+	}
+}
+*/
 
 /**
 * @brief Fill a simulation grid node from hard data and a search radius
